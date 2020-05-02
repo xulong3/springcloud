@@ -21,3 +21,11 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/.idea
+/**/.mvn
+/service-a/mvnw.cmd
+/service-a/mvnw
+/eureka-server/mvnw.cmd
+/eureka-server/mvnw
+/consumer-a/mvnw.cmd
+/consumer-a/mvnw

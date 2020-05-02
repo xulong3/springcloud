@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: eureka
+  security:
+    basic:
+      enable: true
+    user:
+      name: admin
+      password: ok
+  profiles:
+    active: standalone
+

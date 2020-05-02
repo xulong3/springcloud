@@ -1,0 +1,33 @@
+#eureka是一个高可用的组件，它没有后端缓存，每一个实例注册之后需要向注册中心发送心跳（因此可以在内存中完成）
+#当client向server注册时，它会提供一些元数据，例如主机和端口，URL，主页等。Eureka server 从每个client实例接收心跳消息。 如果心跳超时，则通常将该实例从注册server中删除
+#可以访问localhost:8080
+server:
+  port: 8000
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: eureka-standalone
+    lease-renewal-interval-in-seconds: 2 #心跳间隔，默认30秒
+    lease-expiration-duration-in-seconds: 10 #没有心跳的淘汰时间，默认90秒，即3个周期，但是代码有bug，实际上是两倍，180秒
+  client:
+    #在默认情况下erureka server也是一个eureka client ,必须要指定一个 server.
+    #通过eureka.client.registerWithEureka：false和fetchRegistry：false来表明自己是一个eureka server
+    #如果register-with-eureka为true，则开启自注册
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.client.security.basic.user}:${eureka.client.security.basic.password}@${eureka.instance.hostname}:${server.port}/eureka/
+    registry-fetch-interval-seconds: 2 #从eureka服务器注册表中获取注册信息的时间间隔（s），默认为30秒
+    security:
+      basic:
+        user: admin
+        password: ok
+  server:
+    #由于Eureka拥有自我保护机制，当其注册表里服务因为网络或其他原因出现故障而关停时，Eureka不会剔除服务注册，而是等待其修复
+    #以下三项配置是为了服务下线实时刷新服务列表
+    enable-self-preservation: false #关闭自我保护
+    eviction-interval-timer-in-ms: 1000 #设置过期服务清理时间,单位为ms
+    use-read-only-response-cache: false #关闭只读缓存,如果不关闭，可以通过response-cache-update-interval-ms参数设置过期时间
+    response-cache-auto-expiration-in-seconds: 1 #读写缓存过期时间，单位为s
+  dashboard:
+    path: /dashboard

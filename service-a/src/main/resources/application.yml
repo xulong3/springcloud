@@ -1,0 +1,24 @@
+server:
+  port: 8011
+#需要指明spring.application.name,这个很重要，这在以后的服务与服务之间相互调用一般都是根据这个name，不然在eureka界面会显示unkown
+spring:
+  application:
+    name: service-a
+eureka:
+  instance:
+    instance-id: service-a-2
+    #appname: ${spring.application.name} #这个不要也没事
+    prefer-ip-address: true #true表示以ip地址注册到eureka上面(否则以主机名)，此时ip地址是手动获取的
+    #ip-address: 127.0.0.1 #如果两者同时指定，则以手动指定的ip地址为准
+    lease-renewal-interval-in-seconds: 2 #心跳间隔，默认30秒
+    lease-expiration-duration-in-seconds: 10 #没有心跳的淘汰时间，默认90秒，即3个周期，但是代码有bug，实际上是两倍，180秒
+  client:
+    service-url:
+      defaultZone: http://${eureka.client.security.basic.user}:${eureka.client.security.basic.password}@localhost:8000/eureka/
+    register-with-eureka: true #是否将应用实例注册到eureka server
+    registry-fetch-interval-seconds: 2 #从eureka服务器注册表中获取注册信息的时间间隔（s），默认为30秒
+    security:
+      basic:
+        user: admin
+        password: ok
+
