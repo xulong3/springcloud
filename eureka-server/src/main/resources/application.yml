@@ -1,6 +1,6 @@
 spring:
   application:
-    name: eureka
+    name: eureka-server
   security:
     basic:
       enable: true
@@ -9,4 +9,6 @@ spring:
       password: ok
   profiles:
     active: standalone
-
+server:
+  servlet:
+    context-path: /eureka-server
