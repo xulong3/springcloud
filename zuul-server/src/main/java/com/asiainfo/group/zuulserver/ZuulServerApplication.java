@@ -1,17 +1,17 @@
-package com.asiainfo.group.servicea;
+package com.asiainfo.group.zuulserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.netflix.hystrix.EnableHystrix;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 @SpringBootApplication
+@EnableZuulProxy
 @EnableEurekaClient
-@EnableHystrix
-public class ServiceAApplication {
+public class ZuulServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ServiceAApplication.class, args);
+        SpringApplication.run(ZuulServerApplication.class, args);
     }
 
 }

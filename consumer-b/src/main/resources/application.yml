@@ -21,8 +21,9 @@ eureka:
         user: admin
         password: ok
 
-#开启GZIP压缩
+
 feign:
+  #开启GZIP压缩
   compression:
     request:
       # 开启请求压缩
@@ -34,3 +35,45 @@ feign:
     response:
       # 开启响应压缩
       enabled: true
+  hystrix:
+    enabled: true
+  #开启httpClient
+  httpclient:
+    enabled: true
+
+#feign开启日志，每个feignClient都有一个单独的feign.Logger实例
+logging:
+  level:
+    com.asiainfo.group.consumerb.service.CallPortServiceByFeign: info
+#配置超时时间
+ribbon:
+  ReadTimeout: 60000
+  ConnectTimeout: 30000
+  MaxAutoRetries: 0 #最大重试次数，当Eureka中可以找到服务，但是服务连不上时将会重试
+  MaxAutoRetriesNextServer: 0 #切换实例的重试次数
+  OkToRetryOnAllOperations: false # 对所有的操作请求都进行重试，如果是get则可以，如果是post,put等操作没有实现幂等的情况下是很危险的，所以设置为false
+
+hystrix:
+  command:
+    default:
+      execution:
+        #timeout:
+          #开启超时
+          #enabled: true
+        isolation:
+          thread:
+            #配置hystrix的超时时间，默认1秒
+            timeoutInMilliseconds: 65000
+            #如果配置ribbon的重试，hystrix的超时时间要大于ribbon的超时时间，ribbon才会重试
+            #hystrix的超时时间=(1 + MaxAutoRetries + MaxAutoRetriesNextServer) * ReadTimeout 比较好，具体看需求
+
+
+#配置hystrix dashborad
+management:
+  security:
+    enabled: true
+  endpoints:
+    web:
+      exposure:
+        #因为hystrix的指标是需要端口进行支撑的，所以需要增加actuator依赖，并公开hystrix.stream端点以便能被顺利访问到
+        include: hystrix.stream

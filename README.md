@@ -38,3 +38,9 @@
         方法名：callGetPortByFeign
         方法url：/service-a/port/getPort
         
+6、zuul-server工程
+    服务名(工程上下文)：zuul-server
+    单机版端口号：8040
+    单机版实例ID：zuul-server-standalone
+
+

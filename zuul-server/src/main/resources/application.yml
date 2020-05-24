@@ -1,0 +1,32 @@
+server:
+  port: 8040
+  servlet:
+    context-path: /zuul-server
+spring:
+  application:
+    name: zuul-server
+
+eureka:
+  instance:
+    instance-id: zuul-server-standalone
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 2
+    lease-expiration-duration-in-seconds: 10
+  client:
+    service-url:
+      defaultZone: http://${eureka.client.security.basic.user}:${eureka.client.security.basic.password}@localhost:8000/eureka-server/eureka/
+    register-with-eureka: true
+    registry-fetch-interval-seconds: 2
+    security:
+      basic:
+        user: admin
+        password: ok
+zuul:
+  routes:
+    consumer-a:
+      #http://localhost:8040/zuul-server/consumer-a/consumer-a/callPortByRibbon/callGetPortByRibbon
+      path: /consumer-a/**
+      serviceId: consumer-a
+    consumer-b:
+      path: /consumer-b/**
+      serviceId: consumer-b

@@ -25,7 +25,15 @@ hs_err_pid*
 /**/.mvn
 /service-a/mvnw.cmd
 /service-a/mvnw
+
 /eureka-server/mvnw.cmd
 /eureka-server/mvnw
+
 /consumer-a/mvnw.cmd
 /consumer-a/mvnw
+
+/consumer-b/mvnw.cmd
+/consumer-b/mvnw
+
+/zuul-server/mvnw.cmd
+/zuul-server/mvnw

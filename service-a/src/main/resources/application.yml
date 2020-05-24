@@ -23,4 +23,9 @@ eureka:
       basic:
         user: admin
         password: ok
-
+logging:
+  level:
+    #所有的
+    root: info
+    #特定包
+    com.asiainfo.group.servicea.controller: debug

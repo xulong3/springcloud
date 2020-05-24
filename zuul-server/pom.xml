@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.asiainfo.group</groupId>
-    <artifactId>consumer-b</artifactId>
+    <artifactId>zuul-server</artifactId>
     <version>1.0</version>
-    <name>consumer-b</name>
+    <name>zuul-server</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -21,38 +21,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-
-        <!--使用apache的httpclient代替feign默认的-->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.netflix.feign</groupId>
-            <artifactId>feign-httpclient</artifactId>
-            <version>8.18.0</version>
-        </dependency>
-
-        <!--因为hystrix的指标是需要端口进行支撑的，所以需要增加actuator依赖-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
         </dependency>
 
 

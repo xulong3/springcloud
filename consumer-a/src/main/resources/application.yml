@@ -1,17 +1,19 @@
 server:
   port: 8020
+  servlet:
+    context-path: /consumer-a
 spring:
   application:
     name: consumer-a
 eureka:
   instance:
-    instance-id: consumer-a-1
+    instance-id: consumer-a-standalone
     prefer-ip-address: true
     lease-renewal-interval-in-seconds: 2
     lease-expiration-duration-in-seconds: 10
   client:
     service-url:
-      defaultZone: http://${eureka.client.security.basic.user}:${eureka.client.security.basic.password}@localhost:8000/eureka/
+      defaultZone: http://${eureka.client.security.basic.user}:${eureka.client.security.basic.password}@localhost:8000/eureka-server/eureka/
     register-with-eureka: true #是否将应用实例注册到eureka server
     registry-fetch-interval-seconds: 2 #从eureka服务器注册表中获取注册信息的时间间隔（s），默认为30秒
     security:
@@ -28,7 +30,8 @@ ribbon:
   eureka:
     enabled: false
   #ServerListRefreshInterval: 2000 #如果采用Ribbon来访问服务，那么这里会有个缓存（他的数据来源是本地Eureka Client缓存），默认30秒
+
 #对服务提供者指定地址列表
 service-a:
   ribbon:
-    listOfServers: http://localhost:8010,http://localhost:8011
+    listOfServers: http://localhost:8010
